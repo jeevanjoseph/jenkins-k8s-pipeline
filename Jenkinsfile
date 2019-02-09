@@ -3,6 +3,7 @@ pipeline {
   agent any
 
   environment {
+	TF_VAR_region="us-phoenix-1"
   }
 
   stages {
