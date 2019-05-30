@@ -16,6 +16,9 @@ podTemplate(
   ){
     //node = the pod label
     node('build-pod'){
+      stage('Checkout') {
+        checkout scm
+      }
       //container = the container label
       stage('TF Plan') { 
         container('terraform') {
