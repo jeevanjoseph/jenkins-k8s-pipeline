@@ -22,7 +22,6 @@ podTemplate(
       //container = the container label
       stage('TF Plan') { 
         container('terraform') {
-          echo "Hello world"
           sh 'terraform init'
           sh 'terraform plan -out myplan'
         }   
