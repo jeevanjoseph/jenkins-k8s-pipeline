@@ -1,6 +1,6 @@
 variable "region" {
   default = "us-phoenix-1"
-  description = "The region to target with this provider configuration."
+  description = "The region to target with this provider configuration. "
 }
 provider "oci" {
   auth = "InstancePrincipal"
