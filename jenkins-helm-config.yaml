@@ -19,8 +19,9 @@ Master:
     limits:
       cpu: "2000m"
       memory: "4096Mi"
+  HostName: build.voicea.app
   # Use ClusterIP if your setup includes ingress controller
-  ServiceType: LoadBalancer
+  ServiceType: ClusterIP
   SlaveListenerPort: 50000
 
   # List of plugins to be install during Jenkins master start
@@ -33,21 +34,20 @@ Master:
     - blueocean:1.16.0
 
   Ingress:
-    Enabled: false
+    Enabled: true
     # For Kubernetes v1.14+, use 'networking.k8s.io/v1beta1'
     ApiVersion: "extensions/v1beta1"
     labels: {}
-    Annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-    # Set this path to jenkinsUriPrefix above or use annotations to rewrite path
-    # path: "/jenkins"
-    # configures the hostname e.g. jenkins.example.com
-    HostName:
+    Annotations:
+      kubernetes.io/ingress.class: nginx
+      kubernetes.io/tls-acme: "true"
+      certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+      ingress.kubernetes.io/secure-backends: "true"
+    
     TLS:
-    # - secretName: jenkins.cluster.local
-    #   hosts:
-    #     - jenkins.cluster.local
+     - secretName: build.voicea.app
+       hosts:
+         - build.voicea.app
 
 Agent:
   Enabled: true
