@@ -5,6 +5,8 @@ variable "region" {
 provider "oci" {
   auth = "InstancePrincipal"
   region = "${var.region}"
+  version = "~> 3.27"
+
 }
 
 # Get a list of Availability Domains
