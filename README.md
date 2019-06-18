@@ -11,7 +11,7 @@ helm upgrade --install nginx-ingress stable/nginx-ingress
 ## Setup CRDs
 
 ```
-pp kubectl apply \                                                                                             master     oke-cluster/default ⎈  Jun05 13:18 
+pp kubectl apply \
     -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.8/deploy/manifests/00-crds.yaml
 ```
 
@@ -42,4 +42,31 @@ pp kubectl apply -f cluster-issuer.yaml
 ## Deploy the Jenkins Helm Chart
 ```
 pp helm upgrade --install --namespace buildtools -f jenkins-helm-config.yaml --debug sdf-build stable/jenkins
+```
+
+It will generate an ingress definition that is similar to :
+
+```
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+    ingress.kubernetes.io/secure-backends: "true"
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
+
+  name: sdf-build-jenkins
+spec:
+  rules:
+  - host: "build.voicea.app"
+    http:
+      paths:
+      - backend:
+          serviceName: sdf-build-jenkins
+          servicePort: 8080
+  tls:
+    - hosts:
+      - build.voicea.app
+      secretName: build.voicea.app
 ```
