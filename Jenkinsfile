@@ -4,15 +4,12 @@ podTemplate(
   label: 'build-pod',
   containers: [
       // containerTemplate(name: 'jnlp', image: 'jenkins/jnlp-slave:latest',args: '${computer.jnlpmac} ${computer.name}', workingDir: '/home/jenkins'),
-      containerTemplate(name: 'terraform', image: 'hashicorp/terraform:latest', ttyEnabled: true, command: 'cat', workingDir: '/home/jenkins'),
-      containerTemplate(name: 'docker', image:'trion/jenkins-docker-client')
+      containerTemplate(name: 'terraform', image: 'hashicorp/terraform:latest', ttyEnabled: true, command: 'cat', workingDir: '/home/jenkins')
+      
   ],
   envVars: [
       envVar(key:'TF_VAR_region', value:'us-phoenix-1')
-  ],
-  volumes: [
-      hostPathVolume(mountPath: '/var/run/docker.sock',hostPath: '/var/run/docker.sock')
-      ]
+  ]
   ){
     //node = the pod label
     node('build-pod'){
