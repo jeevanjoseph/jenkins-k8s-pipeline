@@ -23,11 +23,11 @@ podTemplate(
           sh 'terraform plan -out myplan'
         }   
       }
-      stage('Approval') {
-        script {
-          def userInput = input(id: 'confirm', message: 'Apply Terraform?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Apply terraform', name: 'confirm'] ])
-        }
-      }
+    //  stage('Approval') {
+    //    script {
+    //      def userInput = input(id: 'confirm', message: 'Apply Terraform?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Apply terraform', name: 'confirm'] ])
+    //    }
+    //  }
       stage('TF Apply') {
         container('terraform') {
           sh 'terraform apply -input=false myplan'
