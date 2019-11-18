@@ -1,4 +1,4 @@
-# Setting up the CI Pipeine.
+# Setting up the CI Pipeine
 
 You need a configured K8s Cluster. Also Helm should be aready setup
 
