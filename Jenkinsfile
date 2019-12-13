@@ -1,6 +1,6 @@
 
 podTemplate(
-  name: 'build-pod',
+  name: 'build-pod', 
   label: 'build-pod',
   containers: [
       // containerTemplate(name: 'jnlp', image: 'jenkins/jnlp-slave:latest',args: '${computer.jnlpmac} ${computer.name}', workingDir: '/home/jenkins'),
