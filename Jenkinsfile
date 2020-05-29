@@ -30,7 +30,7 @@ podTemplate(
       }
       stage('Docker build') { 
         container('docker') {
-          sh 'docker build -t test:latest .'
+          sh 'docker build -t docker-build:test .'
           sh 'docker images'
         }   
       }
