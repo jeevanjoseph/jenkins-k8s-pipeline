@@ -4,17 +4,17 @@ variable "region" {
 }
 provider "oci" {
   auth = "InstancePrincipal"
-  region = "${var.region}"
+  region = var.region
   version = "~> 3.27"
 
 }
 
 # Get a list of Availability Domains
 data "oci_identity_availability_domains" "ads" {
-  compartment_id = "ocid1.tenancy.oc1..aaaaaaaawpqblfemtluwxipipubxhioptheej2r32gvf7em7iftkr3vd2r3a"
+  compartment_id = "ocid1.tenancy.oc1..aaaaaaaaa3qmjxr43tjexx75r6gwk6vjw22ermohbw2vbxyhczksgjir7xdq"
 }
 
 # Output the result
 output "show-ads" {
-  value = "${data.oci_identity_availability_domains.ads.availability_domains}"
+  value = data.oci_identity_availability_domains.ads.availability_domains
 }
