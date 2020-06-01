@@ -31,7 +31,7 @@ podTemplate(
       stage('Docker build') { 
         container('docker') {
           sh 'docker build -t docker-build:latest .'
-          sh 'docker images'
+         
         }   
       }
     //  stage('Approval') {
