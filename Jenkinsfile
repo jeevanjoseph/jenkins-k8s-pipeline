@@ -25,7 +25,7 @@ podTemplate(
       stage('TF Plan') { 
         container('terraform') {
           sh 'terraform init'
-          sh 'terraform plan -out myplan2'
+          sh 'terraform plan -out myplan'
         }   
       }
       stage('Docker build') { 
@@ -41,7 +41,7 @@ podTemplate(
     //  }
       stage('TF Apply') {
         container('terraform') {
-          sh 'terraform apply -input=false myplan2'
+          sh 'terraform apply -input=false myplan'
         }
       }
     }
